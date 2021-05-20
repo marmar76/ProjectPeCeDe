@@ -1,4 +1,4 @@
-image = imread('img5.jpg');
+image = imread('img2.jpg');
 
 % imshow(a);
 forbw = im2bw(image);

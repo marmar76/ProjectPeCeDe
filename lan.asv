@@ -1,4 +1,5 @@
-image = imread('img1.jpg');
+function res = lan(dir)
+image = imread(dir);
 
 % imshow(a);
 forbw = im2bw(image);
@@ -10,19 +11,19 @@ start = 10;
 stop = 24;
 % start = 1;
 % stop = 1110;
-minimal = 1.5;
-maximal = 2.8;
+minimal = 1.0;
+maximal = 1.06;
+arr = [];
 for i = start:stop %numel(stats)
     vmax = max(stats(i).BoundingBox(3),stats(i).BoundingBox(4));
     vmin = min(stats(i).BoundingBox(3),stats(i).BoundingBox(4));
 %     if vmax/vmin < 1.5 || vmax / vmin >= 2.8
 %         continue;
 %     end
-    if (vmax/vmin <= minimal || vmax / vmin >=  maximal) || (stats(i).BoundingBox(3) > stats(i).BoundingBox(4))
+    if (vmax/vmin <= minimal || vmax / vmin >=  maximal) %|| (stats(i).BoundingBox(3) > stats(i).BoundingBox(4))
         continue;
     end
-    rectangle('Position', stats(i).BoundingBox, ...
-    'Linewidth', 1, 'EdgeColor', 'r', 'LineStyle', '-');
+    push(arr,rectangle('Position);
 end
 
 
@@ -41,9 +42,9 @@ for i = start:stop
 %     imshow(temp);
 end
 % canny = edge(a,'Canny');
-% hsv = rgb2hsv(image);
-% hsv(:,:,2) = hsv(:,:,2).*3;
-% image = hsv2rgb(hsv);
+hsv = rgb2hsv(image);
+hsv(:,:,2) = hsv(:,:,2).*3;
+image = hsv2rgb(hsv);
 % a = image();
 % canny10 = edge(a,'Canny',[],10);
 % prewitt10 = edge(a,'Prewitt');
@@ -68,4 +69,6 @@ end
 %     'MajorAxisLength','MinorAxisLength')
 % centers = stats.Centroid;
 % diameters = mean([stats.MajorAxisLength stats.MinorAxisLength],2);
-% radii = diameters/2; 
+% radii = diameters/2;
+res = arr;
+end

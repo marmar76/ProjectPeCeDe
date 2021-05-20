@@ -1,4 +1,5 @@
-image = imread('img1.jpg');
+function res = lan(dir)
+image = imread(dir);
 
 % imshow(a);
 forbw = im2bw(image);
@@ -12,6 +13,7 @@ stop = 24;
 % stop = 1110;
 minimal = 1.0;
 maximal = 1.06;
+arr = [];
 for i = start:stop %numel(stats)
     vmax = max(stats(i).BoundingBox(3),stats(i).BoundingBox(4));
     vmin = min(stats(i).BoundingBox(3),stats(i).BoundingBox(4));
@@ -21,8 +23,7 @@ for i = start:stop %numel(stats)
     if (vmax/vmin <= minimal || vmax / vmin >=  maximal) %|| (stats(i).BoundingBox(3) > stats(i).BoundingBox(4))
         continue;
     end
-    rectangle('Position', stats(i).BoundingBox, ...
-    'Linewidth', 1, 'EdgeColor', 'r', 'LineStyle', '-');
+    arr = [arr,stats(i).BoundingBox];
 end
 
 
@@ -68,4 +69,6 @@ image = hsv2rgb(hsv);
 %     'MajorAxisLength','MinorAxisLength')
 % centers = stats.Centroid;
 % diameters = mean([stats.MajorAxisLength stats.MinorAxisLength],2);
-% radii = diameters/2; 
+% radii = diameters/2;
+res = arr;
+end
