@@ -28,7 +28,7 @@ function processImage(dir, tabGroup)
       rectangle(ax, 'Position', rectusb(i,:), ...
      'Linewidth', 1, 'EdgeColor', 'r', 'LineStyle', '-'); 
     end
-    appviscircle(ax, circle(:,1:2),circle(:,3),'Linewidth', 1, 'EdgeColor', 'r', 'LineStyle', '-', 'EnhanceVisibility',false);
+    drawcircles(ax, 'Center', circle(:,1:2),circle(:,3),'Linewidth', 1, 'EdgeColor', 'r', 'LineStyle', '-');
     hold(ax, 'off');
 end
 
