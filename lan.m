@@ -3,7 +3,7 @@ image = imread(dir);
 
 % imshow(a);
 forbw = im2bw(image);
-imshow(image); 
+% imshow(image); 
 stats = [regionprops(forbw); regionprops(not(forbw))];
 [~,idx] = sort([stats.Area],'descend');
 stats = stats(idx);
@@ -23,7 +23,7 @@ for i = start:stop %numel(stats)
     if (vmax/vmin <= minimal || vmax / vmin >=  maximal) %|| (stats(i).BoundingBox(3) > stats(i).BoundingBox(4))
         continue;
     end
-    arr = [arr,stats(i).BoundingBox];
+    arr(end + 1,:) = stats(i).BoundingBox;
 end
 
 

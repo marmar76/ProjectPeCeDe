@@ -1,4 +1,5 @@
-image = imread('img2.jpg');
+function res = audiojack(dir)
+image = imread(dir);
 
 % imshow(a);
 forbw = im2bw(image);
@@ -18,8 +19,9 @@ gray_image = rgb2gray(image);
 [centers,radii] = imfindcircles(image,[20 25],'ObjectPolarity','dark', ...
     'Sensitivity',0.94);
 length(centers);
-imshow(image);
-h = viscircles(centers,radii);
+res = [centers radii];
+% imshow(image);
+% h = viscircles(centers,radii);
 % for i = start:stop %numel(stats)
 % %     vmax = max(stats(i).BoundingBox(3),stats(i).BoundingBox(4));
 % %     vmin = min(stats(i).BoundingBox(3),stats(i).BoundingBox(4));
@@ -77,3 +79,4 @@ h = viscircles(centers,radii);
 % centers = stats.Centroid;
 % diameters = mean([stats.MajorAxisLength stats.MinorAxisLength],2);
 % radii = diameters/2; 
+end

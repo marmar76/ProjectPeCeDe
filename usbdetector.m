@@ -1,8 +1,9 @@
-image = imread('img1.jpg');
+function res = usbdetector(dir)
+image = imread(dir);
 
 % imshow(a);
 forbw = im2bw(image);
-imshow(image); 
+% imshow(image); 
 stats = [regionprops(forbw); regionprops(not(forbw))];
 [~,idx] = sort([stats.Area],'descend');
 stats = stats(idx);
@@ -12,6 +13,7 @@ stop = 24;
 % stop = 1110;
 minimal = 1.5;
 maximal = 2.8;
+arr = [];
 for i = start:stop %numel(stats)
     vmax = max(stats(i).BoundingBox(3),stats(i).BoundingBox(4));
     vmin = min(stats(i).BoundingBox(3),stats(i).BoundingBox(4));
@@ -21,8 +23,7 @@ for i = start:stop %numel(stats)
     if (vmax/vmin <= minimal || vmax / vmin >=  maximal) || (stats(i).BoundingBox(3) > stats(i).BoundingBox(4))
         continue;
     end
-    rectangle('Position', stats(i).BoundingBox, ...
-    'Linewidth', 1, 'EdgeColor', 'r', 'LineStyle', '-');
+    arr(end + 1,:) = stats(i).BoundingBox;
 end
 
 
@@ -69,3 +70,5 @@ end
 % centers = stats.Centroid;
 % diameters = mean([stats.MajorAxisLength stats.MinorAxisLength],2);
 % radii = diameters/2; 
+res = arr;
+end
